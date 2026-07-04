@@ -1,10 +1,11 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, ArrowUpRight, CircleDot, Shield, Star } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, CircleDot, Shield, BadgeCheck } from 'lucide-react'
 import { useRef } from 'react'
 import { MeshGradient } from '../components/MeshGradient'
 import { MagneticButton } from '../components/MagneticButton'
 import { SplitText } from '../components/SplitText'
 import { AnimatedNumber } from '../components/AnimatedNumber'
+import { BrandMark } from '../components/BrandMark'
 import { PHOTOS } from '../data/photos'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 
@@ -28,6 +29,29 @@ export function Hero() {
       className="relative flex min-h-[100svh] items-center px-5 pt-24 sm:px-8"
     >
       <MeshGradient />
+
+      {/* Navy-затемнение слева: текст на глубоком синем, тёплый свет уходит вправо */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            'linear-gradient(90deg, rgba(7,11,22,0.9) 0%, rgba(7,11,22,0.45) 38%, rgba(7,11,22,0) 65%)',
+        }}
+      />
+
+      {/* Тёплое свечение справа — уход в navy, как на референсе */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-2/3"
+        style={{
+          background:
+            'radial-gradient(60% 60% at 85% 40%, rgba(249,115,22,0.20), rgba(249,115,22,0.06) 45%, transparent 70%)',
+        }}
+      />
+
+      {/* Призрачная фирменная «V» за контентом */}
+      <BrandMark className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[88vh] w-auto -translate-x-1/2 -translate-y-1/2 text-white/[0.04]" />
 
       <motion.div
         style={{ y, opacity, filter: blur }}
@@ -234,11 +258,11 @@ function HeroCollage({
         className="absolute -right-4 top-40 inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-ink-900/80 px-3.5 py-2.5 text-xs text-white shadow-xl backdrop-blur-xl"
       >
         <div className="grid h-9 w-9 place-items-center rounded-xl bg-flame-500/15 ring-1 ring-flame-500/30">
-          <Star className="h-4 w-4 fill-flame-300 text-flame-300" />
+          <BadgeCheck className="h-4 w-4 text-flame-300" />
         </div>
         <div className="leading-tight">
-          <div className="text-[10px] uppercase tracking-[0.2em] text-steel-400">Рейтинг</div>
-          <div className="font-semibold">4.9 / 5 · 87 отзывов</div>
+          <div className="text-[10px] uppercase tracking-[0.2em] text-steel-400">Официально</div>
+          <div className="font-semibold">Договор · ИП</div>
         </div>
       </motion.div>
     </motion.div>

@@ -1,6 +1,7 @@
-import { ArrowUpRight, Mountain } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { BRAND } from '../data/site'
+import { BrandMark } from '../components/BrandMark'
 
 const LINKS = [
   { href: '#services', label: 'Услуги' },
@@ -12,7 +13,7 @@ const LINKS = [
 
 export function Header() {
   const { scrollY } = useScroll()
-  const bg = useTransform(scrollY, [0, 80], ['rgba(6,7,10,0)', 'rgba(6,7,10,0.7)'])
+  const bg = useTransform(scrollY, [0, 80], ['rgba(7,11,22,0)', 'rgba(7,11,22,0.7)'])
   const border = useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(255,255,255,0.06)'])
   const blur = useTransform(scrollY, [0, 80], ['blur(0px)', 'blur(14px)'])
 
@@ -23,7 +24,7 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <a href="#top" className="flex items-center gap-2">
-          <Mountain className="h-6 w-6 text-flame-500" strokeWidth={2.5} />
+          <BrandMark className="h-7 w-7 text-white" />
           <span className="font-display text-lg uppercase tracking-wide sm:text-xl">{BRAND}</span>
         </a>
         <nav className="hidden gap-7 text-sm text-steel-300 lg:flex">

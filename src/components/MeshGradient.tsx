@@ -15,7 +15,7 @@ export function MeshGradient() {
         className="absolute left-1/2 top-1/2 h-[140vmax] w-[140vmax] -translate-x-1/2 -translate-y-1/2"
         style={{
           background:
-            'conic-gradient(from 0deg, rgba(249,115,22,0.18), rgba(234,88,12,0.05), rgba(251,146,60,0.18), rgba(6,7,10,0.0), rgba(249,115,22,0.18))',
+            'conic-gradient(from 0deg, rgba(249,115,22,0.18), rgba(234,88,12,0.05), rgba(251,146,60,0.18), rgba(7,11,22,0.0), rgba(249,115,22,0.18))',
           filter: 'blur(80px)',
           opacity: 0.45,
         }}
@@ -49,7 +49,7 @@ export function MeshGradient() {
       <div
         className="absolute inset-x-0 bottom-0 h-1/3"
         style={{
-          background: 'linear-gradient(to top, rgba(6,7,10,0.95), transparent)',
+          background: 'linear-gradient(to top, rgba(7,11,22,0.95), transparent)',
         }}
       />
     </div>

@@ -1,12 +1,12 @@
-import { Mountain } from 'lucide-react'
 import { BRAND } from '../data/site'
+import { BrandMark } from '../components/BrandMark'
 
 export function Footer() {
   return (
     <footer className="relative border-t border-white/5 px-5 py-10 sm:px-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-steel-400 sm:flex-row">
         <div className="flex items-center gap-2">
-          <Mountain className="h-5 w-5 text-flame-500" strokeWidth={2.5} />
+          <BrandMark className="h-6 w-6 text-white" />
           <span className="font-display text-lg uppercase tracking-wider text-white">{BRAND}</span>
         </div>
         <div>© {new Date().getFullYear()} · Промышленный альпинизм</div>

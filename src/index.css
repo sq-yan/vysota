@@ -7,7 +7,7 @@
 }
 
 html {
-  background: #06070a;
+  background: #070b16;
 }
 
 html.lenis,
@@ -55,7 +55,7 @@ body {
 
 ::selection {
   background: #f97316;
-  color: #06070a;
+  color: #070b16;
 }
 
 @keyframes mesh-rotate {
