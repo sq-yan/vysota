@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Phone, Send } from 'lucide-react'
 import { MagneticButton } from '../components/MagneticButton'
+import { PHONE_DISPLAY, PHONE_TEL, TELEGRAM_URL } from '../data/site'
 
 export function Contact() {
   return (
@@ -46,19 +47,19 @@ export function Contact() {
               </span>
             </h2>
             <p className="mt-5 max-w-xl text-lg text-steel-300">
-              Выезд и расчёт — бесплатно. Перезвоним в течение часа в рабочее время.
+              Выезд и расчёт бесплатно. Перезвоним в течение часа по будням. Работаем по всей Москве и Подмосковью.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
               <MagneticButton
-                href="tel:+70000000000"
+                href={PHONE_TEL}
                 className="group inline-flex items-center gap-3 rounded-full bg-flame-500 px-7 py-4 text-base font-semibold text-black shadow-glow-flame transition hover:bg-flame-400"
               >
                 <Phone className="h-5 w-5" />
-                +7 (000) 000-00-00
+                {PHONE_DISPLAY}
               </MagneticButton>
               <MagneticButton
-                href="https://t.me/your_handle"
+                href={TELEGRAM_URL}
                 target="_blank"
                 rel="noreferrer"
                 strength={14}

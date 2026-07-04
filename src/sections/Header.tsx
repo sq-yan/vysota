@@ -1,5 +1,6 @@
 import { ArrowUpRight, Mountain } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { BRAND } from '../data/site'
 
 const LINKS = [
   { href: '#services', label: 'Услуги' },
@@ -23,9 +24,9 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <a href="#top" className="flex items-center gap-2">
           <Mountain className="h-6 w-6 text-flame-500" strokeWidth={2.5} />
-          <span className="font-display text-2xl tracking-wider">VYSOTA</span>
+          <span className="font-display text-lg uppercase tracking-wide sm:text-xl">{BRAND}</span>
         </a>
-        <nav className="hidden gap-7 text-sm text-steel-300 md:flex">
+        <nav className="hidden gap-7 text-sm text-steel-300 lg:flex">
           {LINKS.map(l => (
             <a key={l.href} href={l.href} className="relative transition-colors hover:text-white">
               <span>{l.label}</span>

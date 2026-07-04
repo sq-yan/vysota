@@ -1,15 +1,19 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { SectionHeader } from './SectionHeader'
-import { GALLERY_PHOTOS } from '../data/photos'
+import { PHOTOS, type Photo } from '../data/photos'
+import { BRAND } from '../data/site'
+
+const SIZES_SMALL = '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 370px'
+const SIZES_WIDE = '(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 745px'
 
 const TILES = [
-  { src: GALLERY_PHOTOS[0], caption: 'Высотные работы', span: 'row-span-2 col-span-1', h: 520 },
-  { src: GALLERY_PHOTOS[1], caption: 'Снаряжение и страховка', span: 'col-span-1', h: 250 },
-  { src: GALLERY_PHOTOS[2], caption: 'Промышленные объекты', span: 'col-span-1', h: 250 },
-  { src: GALLERY_PHOTOS[3], caption: 'Конструкции', span: 'col-span-2', h: 260 },
-  { src: GALLERY_PHOTOS[4], caption: 'Фасады и окна', span: 'col-span-1', h: 260 },
-  { src: GALLERY_PHOTOS[5], caption: 'Высотки', span: 'col-span-1', h: 260 },
+  { photo: PHOTOS.uborkaSnega, caption: 'Уборка снега и кровля', span: 'row-span-2 col-span-1', sizes: SIZES_SMALL },
+  { photo: PHOTOS.montazhFasad, caption: 'Монтаж на фасаде', span: 'col-span-1', sizes: SIZES_SMALL },
+  { photo: PHOTOS.remontShvov, caption: 'Ремонт фасада', span: 'col-span-1', sizes: SIZES_SMALL },
+  { photo: PHOTOS.moykaFasada, caption: 'Мойка остекления', span: 'col-span-2', sizes: SIZES_WIDE },
+  { photo: PHOTOS.montazhZhk, caption: 'Монтаж на ЖК', span: 'col-span-1', sizes: SIZES_SMALL },
+  { photo: PHOTOS.vysotnyeRaboty, caption: 'Высотные работы', span: 'col-span-1', sizes: SIZES_SMALL },
 ]
 
 export function Gallery() {
@@ -19,11 +23,11 @@ export function Gallery() {
         <SectionHeader
           kicker="Атмосфера"
           title="Высота вблизи"
-          subtitle="Фотографии с объектов, на которых работаем — снаряжение, конструкции, виды на город."
+          subtitle="Фото и видео с реальных объектов — процесс работ, снаряжение, результат до и после."
         />
         <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5">
           {TILES.map((t, i) => (
-            <Tile key={t.src + i} src={t.src} caption={t.caption} span={t.span} index={i} />
+            <Tile key={t.photo.src + i} photo={t.photo} sizes={t.sizes} caption={t.caption} span={t.span} index={i} />
           ))}
         </div>
       </div>
@@ -32,12 +36,14 @@ export function Gallery() {
 }
 
 function Tile({
-  src,
+  photo,
+  sizes,
   caption,
   span,
   index,
 }: {
-  src: string
+  photo: Photo
+  sizes: string
   caption: string
   span: string
   index: number
@@ -58,7 +64,9 @@ function Tile({
       style={{ minHeight: 180 }}
     >
       <motion.img
-        src={src}
+        src={photo.src}
+        srcSet={photo.srcSet}
+        sizes={sizes}
         alt={caption}
         loading="lazy"
         decoding="async"
@@ -77,7 +85,7 @@ function Tile({
         initial={false}
         className="absolute inset-x-0 bottom-0 translate-y-2 p-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
       >
-        <div className="text-[10px] uppercase tracking-[0.25em] text-flame-300">VYSOTA</div>
+        <div className="text-[10px] uppercase tracking-[0.25em] text-flame-300">{BRAND}</div>
         <div className="mt-1 font-display text-xl tracking-tight text-white sm:text-2xl">
           {caption}
         </div>

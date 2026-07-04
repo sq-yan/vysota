@@ -5,10 +5,13 @@ import { MeshGradient } from '../components/MeshGradient'
 import { MagneticButton } from '../components/MagneticButton'
 import { SplitText } from '../components/SplitText'
 import { AnimatedNumber } from '../components/AnimatedNumber'
-import { HERO_PHOTOS } from '../data/photos'
+import { PHOTOS } from '../data/photos'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 
 export function Hero() {
   const ref = useRef<HTMLDivElement | null>(null)
+  // Коллаж виден только на lg+; не рендерим его вовсе, чтобы телефоны не качали фото
+  const isDesktop = useMediaQuery('(min-width: 1024px)')
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], [0, 180])
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
@@ -38,7 +41,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-flame-500/30 bg-flame-500/10 px-4 py-1.5 text-xs font-medium text-flame-300 backdrop-blur-sm"
           >
             <CircleDot className="h-3.5 w-3.5 animate-pulse" />
-            Принимаем заказы на этой неделе
+            Принимаем заказы — выезд в течение 24 часов
           </motion.span>
 
           <h1 className="mt-8 font-display text-[clamp(2.75rem,7.5vw,7rem)] leading-[0.9] tracking-tight">
@@ -80,9 +83,9 @@ export function Hero() {
             transition={{ duration: 0.9, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 max-w-xl text-lg leading-relaxed text-steel-300 sm:text-xl"
           >
-            Промышленный альпинизм: герметизация и капремонт швов, мойка
-            высотных окон, монтаж кондиционеров, малярные и штукатурные работы
-            на любой высоте. Допуски, страховка, фотоотчёт.
+            Промышленный альпинизм в Москве — герметизация швов, мойка
+            фасадов, покраска и монтаж на высоте без лесов. Работаем с УК,
+            ТСЖ и бизнес-центрами. Договор, страховка до 5 млн ₽, фотоотчёт.
           </motion.p>
 
           <motion.div
@@ -121,7 +124,7 @@ export function Hero() {
           </motion.div>
         </div>
 
-        <HeroCollage imgY={imgY} sideY={sideY} imgScale={imgScale} />
+        {isDesktop && <HeroCollage imgY={imgY} sideY={sideY} imgScale={imgScale} />}
       </motion.div>
 
       <motion.div
@@ -158,7 +161,9 @@ function HeroCollage({
         className="absolute left-0 top-0 h-[420px] w-[78%] overflow-hidden rounded-[28px] border border-white/10 shadow-[0_30px_80px_-20px_rgba(249,115,22,0.35)] will-change-transform"
       >
         <img
-          src={HERO_PHOTOS.main}
+          src={PHOTOS.vysotnyeRaboty.src}
+          srcSet={PHOTOS.vysotnyeRaboty.srcSet}
+          sizes="340px"
           alt="Высотные работы — фасад"
           loading="eager"
           decoding="async"
@@ -177,7 +182,7 @@ function HeroCollage({
             <div className="text-[10px] uppercase tracking-[0.3em] text-flame-300">
               Действующий объект
             </div>
-            <div className="mt-1 font-display text-2xl tracking-tight">Москва-Сити</div>
+            <div className="mt-1 font-display text-2xl tracking-tight">Москва</div>
           </div>
           <div className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-black/40 px-2.5 py-1 text-[10px] backdrop-blur-md">
             <CircleDot className="h-2.5 w-2.5 animate-pulse text-flame-400" />
@@ -193,8 +198,10 @@ function HeroCollage({
         className="absolute -right-2 bottom-0 h-[260px] w-[60%] overflow-hidden rounded-[24px] border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] will-change-transform"
       >
         <img
-          src={HERO_PHOTOS.side}
-          alt="Промальп — мойка высотных окон"
+          src={PHOTOS.montazhFasad.src}
+          srcSet={PHOTOS.montazhFasad.srcSet}
+          sizes="230px"
+          alt="Промальп — монтаж на фасаде"
           loading="eager"
           decoding="async"
           className="h-full w-full object-cover [filter:saturate(0.9)_brightness(0.95)]"

@@ -4,7 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Bebas Neue"', 'system-ui', 'sans-serif'],
+        // Oswald вместо Bebas Neue: у Bebas на Google Fonts нет кириллицы,
+        // русские заголовки падали в system-ui
+        display: ['Oswald', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {

@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, MapPin, Maximize2, Calendar } from 'lucide-react'
 import { useRef } from 'react'
 import { SectionHeader } from './SectionHeader'
-import { CASE_PHOTOS } from '../data/photos'
+import { PHOTOS, type Photo } from '../data/photos'
 
 type CaseItem = {
   title: string
@@ -11,10 +11,14 @@ type CaseItem = {
   area: string
   days: string
   location: string
-  image: string
+  image: Photo
+  sizes: string
   span: string
   big?: boolean
 }
+
+const SIZES_LARGE = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 580px'
+const SIZES_SMALL = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px'
 
 const CASES: CaseItem[] = [
   {
@@ -24,7 +28,8 @@ const CASES: CaseItem[] = [
     area: '120 п.м.',
     days: '4 дня',
     location: 'Москва, Юго-Запад',
-    image: CASE_PHOTOS.facadeBig,
+    image: PHOTOS.germetizatsiyaShvov,
+    sizes: SIZES_LARGE,
     span: 'lg:col-span-2 lg:row-span-2',
     big: true,
   },
@@ -34,28 +39,31 @@ const CASES: CaseItem[] = [
     meta: '6 этажей · 1 день',
     area: '6 этажей',
     days: '1 день',
-    location: 'Москва-Сити',
-    image: CASE_PHOTOS.windowsClean,
+    location: 'Москва, бизнес-центр',
+    image: PHOTOS.moykaFasada,
+    sizes: SIZES_LARGE,
     span: 'lg:col-span-2',
   },
   {
-    title: 'Окраска фасада',
-    category: 'Малярка',
+    title: 'Ремонт фасада',
+    category: 'Фасад',
     meta: '320 м² · 6 дней',
     area: '320 м²',
     days: '6 дней',
-    location: 'Жилой комплекс',
-    image: CASE_PHOTOS.industrialTank,
+    location: 'Москва, жилой дом',
+    image: PHOTOS.remontShvov,
+    sizes: SIZES_SMALL,
     span: 'lg:col-span-1',
   },
   {
-    title: 'Монтаж кондиционеров',
+    title: 'Монтаж на фасаде ЖК',
     category: 'Монтаж',
-    meta: '8 блоков · 2 дня',
-    area: '8 блоков',
+    meta: '8 точек · 2 дня',
+    area: '8 точек',
     days: '2 дня',
-    location: 'ЖК «Зелёный»',
-    image: CASE_PHOTOS.bridge,
+    location: 'Москва, жилой комплекс',
+    image: PHOTOS.montazhZhk,
+    sizes: SIZES_SMALL,
     span: 'lg:col-span-1',
   },
 ]
@@ -67,7 +75,7 @@ export function Cases() {
         <SectionHeader
           kicker="Объекты"
           title="С чем работали"
-          subtitle="Каждая работа фиксируется фото- и видеоотчётом. Здесь — часть выполненных."
+          subtitle="Каждый объект фиксируем фото и видео. Работаем по Москве и Подмосковью."
         />
         <div className="mt-14 grid auto-rows-[280px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {CASES.map((c, i) => (
@@ -75,7 +83,7 @@ export function Cases() {
           ))}
         </div>
         <div className="mt-10 text-center text-xs uppercase tracking-[0.25em] text-steel-400">
-          Часть фото — иллюстрации. Кейсы с реальными снимками добавим по мере публикации.
+          Кейсы — типовые примеры работ. Фотоотчёты с новых объектов добавляем по мере публикации.
         </div>
       </div>
     </section>
@@ -98,7 +106,9 @@ function CaseCard({ caseData: c, index }: { caseData: CaseItem; index: number })
       className={`group relative overflow-hidden rounded-3xl border border-white/8 bg-ink-800 ${c.span}`}
     >
       <motion.img
-        src={c.image}
+        src={c.image.src}
+        srcSet={c.image.srcSet}
+        sizes={c.sizes}
         alt={c.title}
         loading="lazy"
         decoding="async"
