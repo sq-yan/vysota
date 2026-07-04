@@ -20,8 +20,8 @@ export function Header() {
 
   return (
     <motion.header
-      style={{ backgroundColor: bg, borderColor: border, backdropFilter: blur, WebkitBackdropFilter: blur }}
-      className="fixed inset-x-0 top-0 z-50 border-b"
+      style={{ top: 'var(--promo-h, 0px)', backgroundColor: bg, borderColor: border, backdropFilter: blur, WebkitBackdropFilter: blur }}
+      className="fixed inset-x-0 z-50 border-b transition-[top] duration-300"
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <a
