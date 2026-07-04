@@ -16,7 +16,6 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], [0, 180])
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
-  const blur = useTransform(scrollYProgress, [0, 1], ['blur(0px)', 'blur(4px)'])
 
   const imgY = useTransform(scrollYProgress, [0, 1], [0, -120])
   const sideY = useTransform(scrollYProgress, [0, 1], [0, -180])
@@ -76,7 +75,7 @@ export function Hero() {
       <BrandMark className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[80vh] w-auto -translate-x-1/2 -translate-y-1/2 opacity-[0.05]" />
 
       <motion.div
-        style={{ y, opacity, filter: blur }}
+        style={{ y, opacity }}
         className="relative mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]"
       >
         <div>
