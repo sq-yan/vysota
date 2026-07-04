@@ -40,7 +40,7 @@ export function SplitText({
   return (
     <Wrapper variants={container} initial="hidden" animate="visible" className={className}>
       {words.map((w, i) => (
-        <span key={i} className="mr-[0.25em] inline-block overflow-hidden align-bottom">
+        <span key={i} className="mr-[0.25em] inline-block overflow-hidden align-bottom pb-[0.18em] -mb-[0.18em]">
           <motion.span variants={item} className="inline-block">
             {highlight && highlight.word === w ? highlight.render(w) : w}
           </motion.span>

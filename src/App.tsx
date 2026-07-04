@@ -1,5 +1,6 @@
 import { Cursor } from './components/Cursor'
 import { ScrollProgress } from './components/ScrollProgress'
+import { SecretHud } from './components/SecretHud'
 import { useLenis } from './hooks/useLenis'
 import { Advantages } from './sections/Advantages'
 import { Cases } from './sections/Cases'
@@ -20,6 +21,7 @@ export default function App() {
     <div className="relative min-h-screen bg-ink-950 text-white">
       <ScrollProgress />
       <Cursor />
+      <SecretHud />
       <Header />
       <main className="relative">
         <Hero />

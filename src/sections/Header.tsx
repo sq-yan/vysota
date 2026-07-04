@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { BRAND } from '../data/site'
 import { BrandMark } from '../components/BrandMark'
+import { toggleActive } from '../lib/secret'
 
 const LINKS = [
   { href: '#services', label: 'Услуги' },
@@ -23,7 +24,15 @@ export function Header() {
       className="fixed inset-x-0 top-0 z-50 border-b"
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="#top" className="flex items-center gap-2">
+        <a
+          href="#top"
+          className="flex items-center gap-2"
+          onDoubleClick={e => {
+            e.preventDefault()
+            toggleActive()
+          }}
+          title="Вертикальные Решения"
+        >
           <BrandMark className="h-7 w-auto" />
           <span className="font-display text-lg uppercase tracking-wide sm:text-xl">{BRAND}</span>
         </a>

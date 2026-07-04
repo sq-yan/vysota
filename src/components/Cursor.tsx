@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { subscribeSecret } from '../lib/secret'
 
 export function Cursor() {
   const mx = useMotionValue(-100)
@@ -9,6 +10,9 @@ export function Cursor() {
   const y = useSpring(my, spring)
   const [hovering, setHovering] = useState(false)
   const [enabled, setEnabled] = useState(false)
+  const [cutter, setCutter] = useState(false)
+
+  useEffect(() => subscribeSecret(s => setCutter(s.active)), [])
 
   useEffect(() => {
     const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches
@@ -40,13 +44,24 @@ export function Cursor() {
     <>
       <motion.div
         style={{ x, y }}
-        className="pointer-events-none fixed left-0 top-0 z-[100] -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+        className="pointer-events-none fixed left-0 top-0 z-[300] -translate-x-1/2 -translate-y-1/2"
       >
-        <motion.div
-          animate={{ scale: hovering ? 2.2 : 1 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-          className="h-3 w-3 rounded-full bg-white"
-        />
+        {cutter ? (
+          <motion.img
+            src="/logo-mark.png"
+            alt=""
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1, rotate: -28 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            className="h-10 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]"
+          />
+        ) : (
+          <motion.div
+            animate={{ scale: hovering ? 2.2 : 1 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+            className="h-3 w-3 rounded-full bg-white mix-blend-difference"
+          />
+        )}
       </motion.div>
       <motion.div
         style={{ x: mx, y: my }}
