@@ -73,7 +73,7 @@ export function Hero() {
       />
 
       {/* Призрачная фирменная «V» за контентом */}
-      <BrandMark watermark className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[88vh] w-auto -translate-x-1/2 -translate-y-1/2 text-white/[0.04]" />
+      <BrandMark className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[80vh] w-auto -translate-x-1/2 -translate-y-1/2 opacity-[0.05]" />
 
       <motion.div
         style={{ y, opacity, filter: blur }}
@@ -262,7 +262,7 @@ function HeroCollage({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute -left-6 top-12 inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-ink-900/80 px-3.5 py-2.5 text-xs text-white shadow-xl backdrop-blur-xl"
+        className="absolute -left-6 top-12 inline-flex items-center gap-2 rounded-2xl border border-white/10 z-20 bg-ink-900/90 px-3.5 py-2.5 text-xs text-white shadow-xl"
       >
         <div className="grid h-9 w-9 place-items-center rounded-xl bg-flame-500/15 ring-1 ring-flame-500/30">
           <Shield className="h-4 w-4 text-flame-300" />
@@ -277,7 +277,7 @@ function HeroCollage({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute -right-4 top-40 inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-ink-900/80 px-3.5 py-2.5 text-xs text-white shadow-xl backdrop-blur-xl"
+        className="absolute -right-4 top-40 inline-flex items-center gap-2 rounded-2xl border border-white/10 z-20 bg-ink-900/90 px-3.5 py-2.5 text-xs text-white shadow-xl"
       >
         <div className="grid h-9 w-9 place-items-center rounded-xl bg-flame-500/15 ring-1 ring-flame-500/30">
           <BadgeCheck className="h-4 w-4 text-flame-300" />

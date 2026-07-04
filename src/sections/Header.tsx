@@ -24,7 +24,7 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <a href="#top" className="flex items-center gap-2">
-          <BrandMark className="h-7 w-7 text-white" />
+          <BrandMark className="h-7 w-auto" />
           <span className="font-display text-lg uppercase tracking-wide sm:text-xl">{BRAND}</span>
         </a>
         <nav className="hidden gap-7 text-sm text-steel-300 lg:flex">

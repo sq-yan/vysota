@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="relative border-t border-white/5 px-5 py-10 sm:px-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-steel-400 sm:flex-row">
         <div className="flex items-center gap-2">
-          <BrandMark className="h-6 w-6 text-white" />
+          <BrandMark className="h-6 w-auto" />
           <span className="font-display text-lg uppercase tracking-wider text-white">{BRAND}</span>
         </div>
         <div>© {new Date().getFullYear()} · Промышленный альпинизм</div>
