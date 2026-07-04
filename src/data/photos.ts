@@ -12,6 +12,7 @@ const photo = (name: string, width: number, height: number): Photo => ({
 
 // Ключи описывают содержимое кадра — по ним секции выбирают фото под смысл.
 export const PHOTOS = {
+  heroBg: photo('hero-bg', 1672, 941),
   montazhFasad: photo('montazh-fasad', 1200, 896),
   remontShvov: photo('remont-shvov', 1200, 896),
   moykaFasada: photo('moyka-fasada', 1200, 896),

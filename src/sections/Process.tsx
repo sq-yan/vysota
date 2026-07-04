@@ -27,7 +27,9 @@ const STEPS = [
 
 export function Process() {
   const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
+  // Привязка к центру экрана: пока шаги проходят через середину вьюпорта,
+  // заполнение растёт сверху вниз синхронно со скроллом вниз.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.55'] })
   const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
   return (
@@ -44,6 +46,11 @@ export function Process() {
           <motion.div
             style={{ height: lineHeight }}
             className="absolute left-7 top-0 hidden w-px origin-top bg-gradient-to-b from-flame-500 via-flame-400 to-amber-300 shadow-[0_0_12px_rgba(249,115,22,0.6)] sm:block"
+          />
+          {/* Светящаяся «голова» на кончике заполнения — едет вниз при скролле вниз */}
+          <motion.div
+            style={{ top: lineHeight }}
+            className="absolute left-7 hidden h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-flame-300 shadow-[0_0_16px_5px_rgba(249,115,22,0.7)] sm:block"
           />
 
           <div className="space-y-12 sm:space-y-24">

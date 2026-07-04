@@ -26,8 +26,30 @@ export function Hero() {
     <section
       id="top"
       ref={ref}
-      className="relative flex min-h-[100svh] items-center px-5 pt-24 sm:px-8"
+      className="relative isolate flex min-h-[100svh] items-center px-5 pt-24 sm:px-8"
     >
+      {/* Реальный бэкдроп — стеклянный фасад на закате. Под MeshGradient (-z-20),
+          навигационные градиенты ниже (-z-10) уводят левый край в navy под текст. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
+        <img
+          src={PHOTOS.heroBg.src}
+          srcSet={PHOTOS.heroBg.srcSet}
+          sizes="100vw"
+          alt=""
+          fetchPriority="high"
+          decoding="async"
+          className="h-full w-full object-cover object-[62%_center] opacity-[0.78] [filter:saturate(0.95)_contrast(1.05)]"
+        />
+        {/* базовый скрим: сверху и снизу уводим в ink, чтобы контент дышал */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to bottom, rgba(7,11,22,0.55) 0%, rgba(7,11,22,0.12) 32%, rgba(7,11,22,0.35) 78%, rgba(7,11,22,0.92) 100%)',
+          }}
+        />
+      </div>
+
       <MeshGradient />
 
       {/* Navy-затемнение слева: текст на глубоком синем, тёплый свет уходит вправо */}
@@ -51,7 +73,7 @@ export function Hero() {
       />
 
       {/* Призрачная фирменная «V» за контентом */}
-      <BrandMark className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[88vh] w-auto -translate-x-1/2 -translate-y-1/2 text-white/[0.04]" />
+      <BrandMark watermark className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[88vh] w-auto -translate-x-1/2 -translate-y-1/2 text-white/[0.04]" />
 
       <motion.div
         style={{ y, opacity, filter: blur }}
@@ -69,7 +91,7 @@ export function Hero() {
           </motion.span>
 
           <h1 className="mt-8 font-display text-[clamp(2.75rem,7.5vw,7rem)] leading-[0.9] tracking-tight">
-            <SplitText as="span" text="Работаем там," className="block" />
+            <SplitText as="span" text="Работаем там" className="block" />
             <SplitText as="span" text="где другие" className="block" delay={0.2} />
             <span className="block">
               <SplitText
