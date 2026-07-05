@@ -39,4 +39,7 @@ jobs:
           # vysota/public_html/ ; если заперт прямо в него — просто ./
           local-dir: ./dist/
           server-dir: vysota/public_html/
-          protocol: ftps # Timeweb поддерживает FTP over TLS; при ошибке — сменить на ftp
+          # FTP-пользователь Timeweb работает по обычному FTP (TLS у него не включён —
+          # проверено: FTPS отдаёт "Requested SSL level failed"). Пароль идёт открыто;
+          # для статики это ок. Захотим шифровать — переезд на SFTP (другой action).
+          protocol: ftp
