@@ -26,7 +26,7 @@ export function Hero() {
     <section
       id="top"
       ref={ref}
-      className="relative isolate flex min-h-[100svh] items-center px-5 pt-24 sm:px-8"
+      className="relative isolate flex min-h-[100svh] items-start px-5 pb-20 pt-24 sm:items-center sm:pb-0 sm:px-8"
     >
       {/* Реальный бэкдроп — стеклянный фасад на закате. Под MeshGradient (-z-20),
           навигационные градиенты ниже (-z-10) уводят левый край в navy под текст. */}
@@ -77,8 +77,10 @@ export function Hero() {
       {/* Призрачная фирменная «V» за контентом */}
       <BrandMark className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[80vh] w-auto -translate-x-1/2 -translate-y-1/2 opacity-[0.05]" />
 
+      {/* Скролл-параллакс (сдвиг вверх + затухание) только на десктопе: на телефоне
+          он прятал нижние статы под шапку, едва начнёшь листать */}
       <m.div
-        style={{ y, opacity }}
+        style={isDesktop ? { y, opacity } : undefined}
         className="relative mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]"
       >
         <div>
@@ -92,7 +94,7 @@ export function Hero() {
             Принимаем заказы — выезд в течение 24 часов
           </m.span>
 
-          <h1 className="mt-8 font-display text-[clamp(2.75rem,7.5vw,7rem)] leading-[0.9] tracking-tight">
+          <h1 className="mt-6 font-display text-[clamp(2.75rem,7.5vw,7rem)] leading-[0.9] tracking-tight sm:mt-8">
             <SplitText as="span" text="Работаем там," className="block" />
             <SplitText as="span" text="где другие" className="block" delay={0.2} />
             <span className="block">
@@ -129,7 +131,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-8 max-w-xl text-lg leading-relaxed text-steel-300 sm:text-xl"
+            className="mt-6 max-w-xl text-lg leading-relaxed text-steel-300 sm:mt-8 sm:text-xl"
           >
             Промышленный альпинизм в Москве — герметизация швов, мойка
             фасадов, покраска и монтаж на высоте без лесов. Работаем с УК,
@@ -140,7 +142,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-8 flex flex-wrap items-center gap-4 sm:mt-10"
           >
             <MagneticButton
               href="#contact"
@@ -163,7 +165,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-14 grid max-w-xl grid-cols-2 gap-y-7 border-t border-white/5 pt-8 sm:grid-cols-4"
+            className="mt-10 grid max-w-xl grid-cols-2 gap-y-7 border-t border-white/5 pt-6 sm:mt-14 sm:grid-cols-4 sm:pt-8"
           >
             <Stat value={7} suffix="+" label="лет на высоте" />
             <Stat value={350} suffix="+" label="объектов" />
@@ -178,7 +180,7 @@ export function Hero() {
       <m.div
         animate={{ y: [0, 8, 0], opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-steel-400"
+        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 text-steel-400 sm:block"
       >
         <ArrowDown className="h-5 w-5" />
       </m.div>
@@ -396,7 +398,9 @@ function Stat({
   return (
     <div>
       <div className="font-display text-4xl tracking-tight text-flame-400 sm:text-5xl">
-        {raw ? raw : <AnimatedNumber value={value} suffix={suffix} />}
+        {/* delay ~1с — счёт стартует вместе с появлением блока статов (у него
+            delay 1.05с), duration 2.6с — медленный плавный ролл с дотормозом */}
+        {raw ? raw : <AnimatedNumber value={value} suffix={suffix} duration={2600} delay={1000} />}
       </div>
       <div className="mt-1 text-xs uppercase tracking-[0.2em] text-steel-400">{label}</div>
     </div>

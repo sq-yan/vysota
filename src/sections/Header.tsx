@@ -29,7 +29,9 @@ export function Header() {
           className="flex items-center gap-2"
           onDoubleClick={e => {
             e.preventDefault()
-            toggleActive()
+            // Пасхалка «режь тросы» завязана на десктопный коллаж, курсор-нож и
+            // выход по Esc — на телефоне резать нечего и выйти нечем, потому не пускаем
+            if (window.matchMedia('(min-width: 1024px)').matches) toggleActive()
           }}
           title="Вертикальные Решения"
         >

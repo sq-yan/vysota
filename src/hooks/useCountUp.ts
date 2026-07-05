@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export function useCountUp(target: number, durationMs = 1600, start = true) {
+export function useCountUp(target: number, durationMs = 1600, start = true, delayMs = 0) {
   const [value, setValue] = useState(0)
   const startedRef = useRef(false)
 
@@ -9,21 +9,34 @@ export function useCountUp(target: number, durationMs = 1600, start = true) {
     startedRef.current = true
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const startTime = performance.now()
     let raf = 0
-    const tick = (now: number) => {
-      if (reduce) {
-        setValue(target)
-        return
+    let timer = 0
+
+    const run = () => {
+      const startTime = performance.now()
+      const tick = (now: number) => {
+        if (reduce) {
+          setValue(target)
+          return
+        }
+        const t = Math.min(1, (now - startTime) / durationMs)
+        // квартик ease-out: длинный мягкий хвост в конце — счёт «дотормаживает»
+        const eased = 1 - Math.pow(1 - t, 4)
+        setValue(target * eased)
+        if (t < 1) raf = requestAnimationFrame(tick)
       }
-      const t = Math.min(1, (now - startTime) / durationMs)
-      const eased = 1 - Math.pow(1 - t, 3)
-      setValue(target * eased)
-      if (t < 1) raf = requestAnimationFrame(tick)
+      raf = requestAnimationFrame(tick)
     }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [target, durationMs, start])
+
+    // задержка старта — чтобы счёт начинался в момент появления блока, а не в t=0
+    if (delayMs > 0) timer = window.setTimeout(run, delayMs)
+    else run()
+
+    return () => {
+      cancelAnimationFrame(raf)
+      clearTimeout(timer)
+    }
+  }, [target, durationMs, start, delayMs])
 
   return value
 }
