@@ -12,7 +12,13 @@ const photo = (name: string, width: number, height: number): Photo => ({
 
 // Ключи описывают содержимое кадра — по ним секции выбирают фото под смысл.
 export const PHOTOS = {
-  heroBg: photo('hero-bg', 1672, 941),
+  // У фона Hero есть промежуточный размер 960w: на телефонах с DPR 2-3
+  // 480w мылится (портретный object-cover растягивает кадр по высоте)
+  heroBg: {
+    ...photo('hero-bg', 1672, 941),
+    srcSet:
+      '/photos/hero-bg-480.jpg 480w, /photos/hero-bg-960.jpg 960w, /photos/hero-bg.jpg 1672w',
+  },
   montazhFasad: photo('montazh-fasad', 1200, 896),
   remontShvov: photo('remont-shvov', 1200, 896),
   moykaFasada: photo('moyka-fasada', 1200, 896),

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import {
   ArrowUpRight,
   Building2,
@@ -58,7 +58,7 @@ export function Services() {
         />
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
-            <motion.div
+            <m.div
               key={s.title}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -78,7 +78,7 @@ export function Services() {
                   <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </TiltCard>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

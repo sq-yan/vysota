@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { Maximize2 } from 'lucide-react'
 import { SectionHeader } from './SectionHeader'
@@ -73,7 +73,7 @@ function Tile({
   const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%'])
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ function Tile({
       className={`group relative cursor-zoom-in overflow-hidden rounded-2xl border border-white/8 bg-ink-800 outline-none ring-flame-500/0 transition-[box-shadow] duration-500 focus-visible:ring-2 focus-visible:ring-flame-500/60 hover:shadow-[0_25px_60px_-20px_rgba(249,115,22,0.35)] ${span}`}
       style={{ minHeight: 180 }}
     >
-      <motion.img
+      <m.img
         src={photo.src}
         srcSet={photo.srcSet}
         sizes={sizes}
@@ -128,6 +128,6 @@ function Tile({
           {caption}
         </div>
       </div>
-    </motion.div>
+    </m.div>
   )
 }

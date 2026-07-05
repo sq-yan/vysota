@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Star, Quote, ArrowUpRight, MessageCircle } from 'lucide-react'
 import { SectionHeader } from './SectionHeader'
 import { REVIEWS } from '../data/reviews'
@@ -33,7 +33,7 @@ export function Reviews() {
         {REVIEWS.length > 0 ? (
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {REVIEWS.map((r, i) => (
-              <motion.article
+              <m.article
                 key={r.name + i}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -51,7 +51,7 @@ export function Reviews() {
                   </div>
                   <div className="text-xs text-steel-500">{r.date}</div>
                 </div>
-              </motion.article>
+              </m.article>
             ))}
           </div>
         ) : (

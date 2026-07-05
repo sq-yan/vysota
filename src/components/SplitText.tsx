@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { m } from 'framer-motion'
+import type { ElementType, ReactNode } from 'react'
 
 type Props = {
   text: string
@@ -36,14 +36,14 @@ export function SplitText({
     },
   }
 
-  const Wrapper: any = motion[as]
+  const Wrapper = m[as] as ElementType
   return (
     <Wrapper variants={container} initial="hidden" animate="visible" className={className}>
       {words.map((w, i) => (
         <span key={i} className="mr-[0.25em] inline-block overflow-hidden align-bottom pb-[0.18em] -mb-[0.18em]">
-          <motion.span variants={item} className="inline-block">
+          <m.span variants={item} className="inline-block">
             {highlight && highlight.word === w ? highlight.render(w) : w}
-          </motion.span>
+          </m.span>
         </span>
       ))}
     </Wrapper>

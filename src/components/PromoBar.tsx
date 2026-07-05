@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { X, Sparkles } from 'lucide-react'
 
 // Закрываемая промо-полоса вверху. Высоту отдаёт в CSS-переменную --promo-h,
@@ -25,7 +25,7 @@ export function PromoBar() {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.div
+        <m.div
           initial={{ y: '-100%' }}
           animate={{ y: 0 }}
           exit={{ y: '-100%' }}
@@ -46,7 +46,7 @@ export function PromoBar() {
           >
             <X className="h-4 w-4" />
           </button>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

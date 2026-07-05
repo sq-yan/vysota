@@ -33,7 +33,7 @@ body,
   margin: 0;
   min-height: 100%;
   color: #fff;
-  font-family: Inter, system-ui, sans-serif;
+  font-family: 'Inter Variable', Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -67,6 +67,32 @@ body {
 @keyframes marquee-x {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+/* Переливающийся оранжевый градиент — для акцентного слова и линии под ним.
+   Первый и последний цвет совпадают, поэтому цикл бесшовный. */
+@keyframes shimmer-flame {
+  from { background-position: 0% center; }
+  to { background-position: -200% center; }
+}
+
+.shimmer-flame {
+  background-image: linear-gradient(
+    90deg,
+    #fdba74,
+    #f97316,
+    #fbbf24,
+    #ea580c,
+    #fdba74
+  );
+  background-size: 200% auto;
+  animation: shimmer-flame 3.5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-flame {
+    animation: none;
+  }
 }
 
 .marquee-track {

@@ -1,22 +1,27 @@
-import { motion } from 'framer-motion'
+import { m, useInView } from 'framer-motion'
 import { Phone, Send } from 'lucide-react'
+import { useRef } from 'react'
 import { MagneticButton } from '../components/MagneticButton'
 import { PHONE_DISPLAY, PHONE_TEL, TELEGRAM_URL } from '../data/site'
 
 export function Contact() {
+  const ref = useRef<HTMLElement>(null)
+  // «Маячок» крутится только пока блок на экране
+  const inView = useInView(ref)
+
   return (
-    <section id="contact" className="relative px-5 py-28 sm:px-8 sm:py-36">
+    <section id="contact" ref={ref} className="relative px-5 py-28 sm:px-8 sm:py-36">
       <div className="mx-auto max-w-5xl">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 36 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="relative overflow-hidden rounded-[36px] border border-flame-500/20 bg-gradient-to-br from-ink-800 via-ink-900 to-ink-950 p-10 sm:p-16"
         >
-          <motion.div
+          <m.div
             aria-hidden
-            animate={{ rotate: [0, 360] }}
+            animate={inView ? { rotate: 360 } : undefined}
             transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
             className="absolute -inset-1/2"
             style={{
@@ -74,7 +79,7 @@ export function Contact() {
               Работаем по будням 9:00–20:00, в выходные — по согласованию.
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

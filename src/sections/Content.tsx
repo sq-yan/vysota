@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { QRCodeSVG } from 'qrcode.react'
 import { PlayCircle, ArrowUpRight, ScanLine } from 'lucide-react'
 import { SectionHeader } from './SectionHeader'
@@ -27,7 +27,7 @@ export function Content() {
             </a>
           </div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.94 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-80px' }}
@@ -41,7 +41,7 @@ export function Content() {
               <ScanLine className="h-4 w-4 text-flame-400" />
               Наведите камеру — откроется канал
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

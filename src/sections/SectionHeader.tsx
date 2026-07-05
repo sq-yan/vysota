@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 type Props = {
   kicker: string
@@ -9,7 +9,7 @@ type Props = {
 
 export function SectionHeader({ kicker, title, subtitle, align = 'left' }: Props) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
@@ -28,6 +28,6 @@ export function SectionHeader({ kicker, title, subtitle, align = 'left' }: Props
           {subtitle}
         </p>
       )}
-    </motion.div>
+    </m.div>
   )
 }

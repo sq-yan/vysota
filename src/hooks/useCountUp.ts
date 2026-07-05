@@ -9,14 +9,13 @@ export function useCountUp(target: number, durationMs = 1600, start = true) {
     startedRef.current = true
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) {
-      setValue(target)
-      return
-    }
-
     const startTime = performance.now()
     let raf = 0
     const tick = (now: number) => {
+      if (reduce) {
+        setValue(target)
+        return
+      }
       const t = Math.min(1, (now - startTime) / durationMs)
       const eased = 1 - Math.pow(1 - t, 3)
       setValue(target * eased)

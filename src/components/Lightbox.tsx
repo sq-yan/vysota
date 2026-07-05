@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Photo } from '../data/photos'
 
@@ -43,7 +43,7 @@ export function Lightbox({
   return createPortal(
     <AnimatePresence>
       {current && (
-        <motion.div
+        <m.div
           key="lightbox"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -85,7 +85,7 @@ export function Lightbox({
             <ChevronRight className="h-6 w-6" />
           </button>
 
-          <motion.figure
+          <m.figure
             key={current.photo.src}
             initial={{ opacity: 0, scale: 0.92, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -109,8 +109,8 @@ export function Lightbox({
                 {index! + 1} / {items.length}
               </span>
             </figcaption>
-          </motion.figure>
-        </motion.div>
+          </m.figure>
+        </m.div>
       )}
     </AnimatePresence>,
     document.body,

@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { m, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'
 import { useRef } from 'react'
 
@@ -32,14 +32,14 @@ export function TiltCard({ children, className, max = 8 }: Props) {
   }
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ rotateX, rotateY, transformPerspective: 1100, transformStyle: 'preserve-3d' }}
       className={className}
     >
-      <motion.div
+      <m.div
         aria-hidden
         style={{
           background: `radial-gradient(circle at ${glareX.get()} ${glareY.get()}, rgba(249,115,22,0.18), transparent 50%)`,
@@ -47,6 +47,6 @@ export function TiltCard({ children, className, max = 8 }: Props) {
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
       />
       {children}
-    </motion.div>
+    </m.div>
   )
 }

@@ -9,13 +9,17 @@
       name="description"
       content="Промышленный альпинизм в Москве — герметизация швов, мойка фасадов, покраска, монтаж кондиционеров на высоте. Без лесов и автовышек. Договор, страховка до 5 млн ₽, фотоотчёт. Выезд бесплатно."
     />
-    <link rel="canonical" href="https://vysota.vercel.app/" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Oswald (есть кириллица) вместо Bebas Neue (кириллицы нет) -->
+    <link rel="canonical" href="https://www.vysota-vr.ru/" />
+    <!-- Шрифты self-hosted через @fontsource-variable (см. src/main.tsx):
+         нет запросов к Google Fonts — быстрее и стабильнее из РФ -->
+    <!-- Preload фонового фото Hero — LCP-кандидат на всех вьюпортах -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="image"
+      href="/photos/hero-bg.jpg"
+      imagesrcset="/photos/hero-bg-480.jpg 480w, /photos/hero-bg-960.jpg 960w, /photos/hero-bg.jpg 1672w"
+      imagesizes="(orientation: portrait) 178vh, 100vw"
+      fetchpriority="high"
     />
     <!-- Preload LCP-фото hero-коллажа (коллаж рендерится только на десктопе) -->
     <link
@@ -32,9 +36,9 @@
     <meta property="og:title" content="Вертикальные Решения — промышленный альпинизм в Москве" />
     <meta property="og:description" content="Герметизация швов, мойка фасадов, покраска и монтаж на высоте без лесов. Договор, страховка, фотоотчёт." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://vysota.vercel.app/" />
+    <meta property="og:url" content="https://www.vysota-vr.ru/" />
     <meta property="og:locale" content="ru_RU" />
-    <meta property="og:image" content="https://vysota.vercel.app/og-image.jpg" />
+    <meta property="og:image" content="https://www.vysota-vr.ru/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -53,8 +57,8 @@
       "@type": "LocalBusiness",
       "name": "Вертикальные Решения",
       "description": "Промышленный альпинизм в Москве: герметизация швов, мойка фасадов, покраска, монтаж кондиционеров на высоте без лесов и автовышек.",
-      "url": "https://vysota.vercel.app/",
-      "image": "https://vysota.vercel.app/og-image.jpg",
+      "url": "https://www.vysota-vr.ru/",
+      "image": "https://www.vysota-vr.ru/og-image.jpg",
       "telephone": "+79165054054",
       "address": {
         "@type": "PostalAddress",

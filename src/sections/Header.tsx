@@ -1,5 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import { BRAND } from '../data/site'
 import { BrandMark } from '../components/BrandMark'
 import { toggleActive } from '../lib/secret'
@@ -19,7 +19,7 @@ export function Header() {
   const blur = useTransform(scrollY, [0, 80], ['blur(0px)', 'blur(14px)'])
 
   return (
-    <motion.header
+    <m.header
       style={{ top: 'var(--promo-h, 0px)', backgroundColor: bg, borderColor: border, backdropFilter: blur, WebkitBackdropFilter: blur }}
       className="fixed inset-x-0 z-50 border-b transition-[top] duration-300"
     >
@@ -52,6 +52,6 @@ export function Header() {
           <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </a>
       </div>
-    </motion.header>
+    </m.header>
   )
 }

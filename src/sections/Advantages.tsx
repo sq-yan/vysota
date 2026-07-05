@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Award, Clock, ShieldCheck, Wrench } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { SectionHeader } from './SectionHeader'
@@ -39,7 +39,7 @@ export function Advantages() {
         />
         <div className="mt-14 grid gap-5 md:grid-cols-2">
           {ADVANTAGES.map((a, i) => (
-            <motion.div
+            <m.div
               key={a.title}
               initial={{ opacity: 0, x: i % 2 === 0 ? -32 : 32 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -58,7 +58,7 @@ export function Advantages() {
                 <h3 className="text-lg font-semibold tracking-tight">{a.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-steel-300">{a.text}</p>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

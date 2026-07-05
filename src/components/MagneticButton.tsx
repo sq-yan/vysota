@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion'
-import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'
+import { m, useMotionValue, useSpring } from 'framer-motion'
+import type { ElementType, MouseEvent as ReactMouseEvent, ReactNode } from 'react'
 import { useRef } from 'react'
 
 type Props = {
@@ -45,7 +45,7 @@ export function MagneticButton({
     y.set(0)
   }
 
-  const Comp: any = href ? motion.a : motion.button
+  const Comp = (href ? m.a : m.button) as ElementType
   return (
     <Comp
       ref={ref}

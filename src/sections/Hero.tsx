@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, ArrowUpRight, CircleDot, Shield, BadgeCheck } from 'lucide-react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { MeshGradient } from '../components/MeshGradient'
@@ -34,7 +34,9 @@ export function Hero() {
         <img
           src={PHOTOS.heroBg.src}
           srcSet={PHOTOS.heroBg.srcSet}
-          sizes="100vw"
+          // при object-cover на портретном экране видимая ширина кадра
+          // ~ высота вьюпорта × аспект фото (1.78), иначе браузер возьмёт мыло
+          sizes="(orientation: portrait) 178vh, 100vw"
           alt=""
           fetchPriority="high"
           decoding="async"
@@ -75,12 +77,12 @@ export function Hero() {
       {/* Призрачная фирменная «V» за контентом */}
       <BrandMark className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[80vh] w-auto -translate-x-1/2 -translate-y-1/2 opacity-[0.05]" />
 
-      <motion.div
+      <m.div
         style={{ y, opacity }}
         className="relative mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]"
       >
         <div>
-          <motion.span
+          <m.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -88,7 +90,7 @@ export function Hero() {
           >
             <CircleDot className="h-3.5 w-3.5 animate-pulse" />
             Принимаем заказы — выезд в течение 24 часов
-          </motion.span>
+          </m.span>
 
           <h1 className="mt-8 font-display text-[clamp(2.75rem,7.5vw,7rem)] leading-[0.9] tracking-tight">
             <SplitText as="span" text="Работаем там," className="block" />
@@ -102,10 +104,10 @@ export function Hero() {
                   word: 'боятся',
                   render: w => (
                     <span className="relative inline-block">
-                      <span className="bg-gradient-to-r from-flame-300 via-flame-500 to-amber-500 bg-clip-text text-transparent">
+                      <span className="shimmer-flame bg-clip-text text-transparent">
                         {w}
                       </span>
-                      <motion.span
+                      <m.span
                         aria-hidden
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
@@ -114,7 +116,7 @@ export function Hero() {
                           duration: 0.9,
                           ease: [0.22, 1, 0.36, 1],
                         }}
-                        className="absolute -bottom-2 left-0 h-[3px] w-full origin-left rounded-full bg-gradient-to-r from-flame-500 to-amber-400"
+                        className="shimmer-flame absolute -bottom-2 left-0 h-[3px] w-full origin-left rounded-full"
                       />
                     </span>
                   ),
@@ -123,7 +125,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
@@ -132,9 +134,9 @@ export function Hero() {
             Промышленный альпинизм в Москве — герметизация швов, мойка
             фасадов, покраска и монтаж на высоте без лесов. Работаем с УК,
             ТСЖ и бизнес-центрами. Договор, страховка до 5 млн ₽, фотоотчёт.
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
@@ -155,9 +157,9 @@ export function Hero() {
             >
               Что мы делаем
             </MagneticButton>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
@@ -167,19 +169,19 @@ export function Hero() {
             <Stat value={350} suffix="+" label="объектов" />
             <InjuriesStat />
             <Stat value={24} suffix="/7" label="срочный выезд" />
-          </motion.div>
+          </m.div>
         </div>
 
         {isDesktop && <HeroCollage imgY={imgY} sideY={sideY} imgScale={imgScale} />}
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         animate={{ y: [0, 8, 0], opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-steel-400"
       >
         <ArrowDown className="h-5 w-5" />
-      </motion.div>
+      </m.div>
     </section>
   )
 }
@@ -200,7 +202,7 @@ function HeroCollage({
   const fellB = secret.fallen.includes('b')
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, scale: 0.94 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -208,7 +210,7 @@ function HeroCollage({
     >
       {/* Карточка A — большая */}
       <Cuttable anchor="left-0 top-0 h-[420px] w-[78%]" active={active} fallen={fellA} onCut={() => fall('a')} dir={-1}>
-        <motion.div
+        <m.div
           style={{ y: imgY, scale: imgScale }}
           animate={{ rotate: [-1.2, 1.2, -1.2] }}
           transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
@@ -243,12 +245,12 @@ function HeroCollage({
               LIVE
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </Cuttable>
 
       {/* Карточка B — боковая */}
       <Cuttable anchor="-right-2 bottom-0 h-[260px] w-[60%]" active={active} fallen={fellB} onCut={() => fall('b')} dir={1}>
-        <motion.div
+        <m.div
           style={{ y: sideY }}
           animate={{ rotate: [3, -2, 3] }}
           transition={{ duration: 17, repeat: Infinity, ease: 'easeInOut' }}
@@ -267,11 +269,11 @@ function HeroCollage({
             aria-hidden
             className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink-950/80"
           />
-        </motion.div>
+        </m.div>
       </Cuttable>
 
       {/* Плашка «Страховка» — гаснет вместе с карточкой A */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: fellA ? 0 : 1, y: fellA ? 24 : 0 }}
         transition={{ duration: 0.5, delay: fellA ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -284,10 +286,10 @@ function HeroCollage({
           <div className="text-[10px] uppercase tracking-[0.2em] text-steel-400">Страховка</div>
           <div className="font-semibold">До 5 000 000 ₽</div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Плашка «Официально» — гаснет вместе с карточкой B */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: fellB ? 0 : 1, y: fellB ? 24 : 0 }}
         transition={{ duration: 0.5, delay: fellB ? 0 : 0.35, ease: [0.22, 1, 0.36, 1] }}
@@ -300,8 +302,8 @@ function HeroCollage({
           <div className="text-[10px] uppercase tracking-[0.2em] text-steel-400">Официально</div>
           <div className="font-semibold">Договор · ИП</div>
         </div>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   )
 }
 
@@ -339,7 +341,7 @@ function Cuttable({
           <div className="h-3 w-2.5 rounded-[3px] border-[1.5px] border-amber-300/80" />
         </div>
       )}
-      <motion.div
+      <m.div
         className="absolute inset-0"
         animate={
           fallen
@@ -353,7 +355,7 @@ function Cuttable({
         }
       >
         {children}
-      </motion.div>
+      </m.div>
     </div>
   )
 }
@@ -366,7 +368,7 @@ function InjuriesStat() {
 
   return (
     <div>
-      <motion.div
+      <m.div
         key={n}
         initial={n > 0 ? { scale: 0.3, opacity: 0, rotate: -12 } : false}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
@@ -374,7 +376,7 @@ function InjuriesStat() {
         className={`font-display text-4xl tracking-tight sm:text-5xl ${n > 0 ? 'text-red-500 drop-shadow-[0_0_18px_rgba(239,68,68,0.5)]' : 'text-flame-400'}`}
       >
         {n === 0 ? '∅' : n}
-      </motion.div>
+      </m.div>
       <div className="mt-1 text-xs uppercase tracking-[0.2em] text-steel-400">травм</div>
     </div>
   )

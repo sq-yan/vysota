@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { SectionHeader } from './SectionHeader'
 
@@ -43,12 +43,12 @@ export function Process() {
 
         <div ref={ref} className="relative mt-16">
           <div className="absolute left-7 top-0 bottom-0 hidden w-px bg-white/10 sm:block" />
-          <motion.div
+          <m.div
             style={{ height: lineHeight }}
             className="absolute left-7 top-0 hidden w-px origin-top bg-gradient-to-b from-flame-500 via-flame-400 to-amber-300 shadow-[0_0_12px_rgba(249,115,22,0.6)] sm:block"
           />
           {/* Светящаяся «голова» на кончике заполнения — едет вниз при скролле вниз */}
-          <motion.div
+          <m.div
             style={{ top: lineHeight }}
             className="absolute left-7 hidden h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-flame-300 shadow-[0_0_16px_5px_rgba(249,115,22,0.7)] sm:block"
           />
@@ -76,13 +76,13 @@ function Step({ step, index }: { step: (typeof STEPS)[number]; index: number }) 
   const dotGlow = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       style={{ opacity, x }}
       className="relative grid grid-cols-[auto_1fr] items-start gap-6 sm:gap-10"
     >
       <div className="relative flex h-14 w-14 items-center justify-center rounded-full border border-flame-500/40 bg-ink-900/80 backdrop-blur-md sm:h-16 sm:w-16">
-        <motion.div
+        <m.div
           style={{ scale: dotScale, opacity: dotGlow }}
           className="absolute inset-0 rounded-full bg-flame-500/30 blur-xl"
         />
@@ -95,6 +95,6 @@ function Step({ step, index }: { step: (typeof STEPS)[number]; index: number }) 
         <h3 className="mt-2 font-display text-3xl tracking-tight sm:text-4xl">{step.title}</h3>
         <p className="mt-3 max-w-xl text-base leading-relaxed text-steel-300">{step.text}</p>
       </div>
-    </motion.div>
+    </m.div>
   )
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { m, useMotionValue, useSpring } from 'framer-motion'
 import { subscribeSecret } from '../lib/secret'
 
 export function Cursor() {
@@ -9,15 +9,16 @@ export function Cursor() {
   const x = useSpring(mx, spring)
   const y = useSpring(my, spring)
   const [hovering, setHovering] = useState(false)
-  const [enabled, setEnabled] = useState(false)
   const [cutter, setCutter] = useState(false)
+  // Кастомный курсор только там, где есть точный указатель — известно сразу
+  const [enabled] = useState(
+    () => window.matchMedia('(hover: hover) and (pointer: fine)').matches,
+  )
 
   useEffect(() => subscribeSecret(s => setCutter(s.active)), [])
 
   useEffect(() => {
-    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches
-    if (!fine) return
-    setEnabled(true)
+    if (!enabled) return
     document.body.classList.add('has-custom-cursor')
 
     const onMove = (e: MouseEvent) => {
@@ -36,18 +37,18 @@ export function Cursor() {
       window.removeEventListener('mouseover', onOver)
       document.body.classList.remove('has-custom-cursor')
     }
-  }, [mx, my])
+  }, [enabled, mx, my])
 
   if (!enabled) return null
 
   return (
     <>
-      <motion.div
+      <m.div
         style={{ x, y }}
         className="pointer-events-none fixed left-0 top-0 z-[300] -translate-x-1/2 -translate-y-1/2"
       >
         {cutter ? (
-          <motion.img
+          <m.img
             src="/logo-mark.png"
             alt=""
             initial={{ scale: 0.5, opacity: 0 }}
@@ -56,19 +57,19 @@ export function Cursor() {
             className="h-10 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]"
           />
         ) : (
-          <motion.div
+          <m.div
             animate={{ scale: hovering ? 2.2 : 1 }}
             transition={{ type: 'spring', stiffness: 260, damping: 22 }}
             className="h-3 w-3 rounded-full bg-white mix-blend-difference"
           />
         )}
-      </motion.div>
-      <motion.div
+      </m.div>
+      <m.div
         style={{ x: mx, y: my }}
         className="pointer-events-none fixed left-0 top-0 z-[99] -translate-x-1/2 -translate-y-1/2"
       >
         <div className="h-[280px] w-[280px] rounded-full bg-flame-500/15 blur-3xl" />
-      </motion.div>
+      </m.div>
     </>
   )
 }

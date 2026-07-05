@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 const BRANDS = ['SIKA', 'TIKKURILA', 'KNAUF', 'CAPAROL', 'PENOSIL', 'РОГНЕДА']
 
@@ -11,7 +11,7 @@ export function TrustStrip() {
         </div>
         <div className="mt-7 grid grid-cols-3 items-center gap-x-6 gap-y-6 sm:grid-cols-6">
           {BRANDS.map((b, i) => (
-            <motion.div
+            <m.div
               key={b}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -22,7 +22,7 @@ export function TrustStrip() {
               <span className="font-display text-2xl tracking-[0.18em] text-steel-300/70 transition-all duration-300 hover:text-flame-300 sm:text-3xl">
                 {b}
               </span>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

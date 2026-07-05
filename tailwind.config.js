@@ -5,9 +5,10 @@ export default {
     extend: {
       fontFamily: {
         // Oswald вместо Bebas Neue: у Bebas на Google Fonts нет кириллицы,
-        // русские заголовки падали в system-ui
-        display: ['Oswald', 'system-ui', 'sans-serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        // русские заголовки падали в system-ui.
+        // «* Variable» — self-hosted вариативные версии из @fontsource-variable.
+        display: ['Oswald Variable', 'Oswald', 'system-ui', 'sans-serif'],
+        sans: ['Inter Variable', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         // Тёмно-синяя (navy) база в цвет логотипа «Вертикальные Решения»
@@ -25,8 +26,11 @@ export default {
           300: '#fdba74',
         },
         steel: {
+          600: '#5b6472',
+          500: '#7a8494',
           400: '#9aa3b2',
           300: '#c4cad5',
+          200: '#dde1e8',
         },
       },
       boxShadow: {

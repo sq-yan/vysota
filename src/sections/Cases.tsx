@@ -1,6 +1,7 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { m, useInView, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, MapPin, Maximize2, Calendar } from 'lucide-react'
 import { useRef } from 'react'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 import { SectionHeader } from './SectionHeader'
 import { PHOTOS, type Photo } from '../data/photos'
 
@@ -95,9 +96,13 @@ function CaseCard({ caseData: c, index }: { caseData: CaseItem; index: number })
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const imgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%'])
   const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.05, 1.1])
+  // Бесконечный блик — только на десктопе и только пока карточка на экране
+  const desktop = useMediaQuery('(min-width: 1024px)')
+  const inView = useInView(ref)
+  const shimmer = desktop && inView
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -105,7 +110,7 @@ function CaseCard({ caseData: c, index }: { caseData: CaseItem; index: number })
       transition={{ duration: 0.8, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
       className={`group relative overflow-hidden rounded-3xl border border-white/8 bg-ink-800 ${c.span}`}
     >
-      <motion.img
+      <m.img
         src={c.image.src}
         srcSet={c.image.srcSet}
         sizes={c.sizes}
@@ -128,30 +133,32 @@ function CaseCard({ caseData: c, index }: { caseData: CaseItem; index: number })
         aria-hidden
         className="absolute inset-0 bg-grid-faint bg-[size:48px_48px] opacity-15 mix-blend-overlay"
       />
-      <motion.div
-        aria-hidden
-        animate={{ x: ['-120%', '120%'] }}
-        transition={{
-          duration: 9 + index * 1.2,
-          repeat: Infinity,
-          ease: 'linear',
-          delay: index * 0.8,
-        }}
-        className="absolute inset-y-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/8 to-transparent"
-      />
+      {shimmer && (
+        <m.div
+          aria-hidden
+          animate={{ x: ['-120%', '120%'] }}
+          transition={{
+            duration: 9 + index * 1.2,
+            repeat: Infinity,
+            ease: 'linear',
+            delay: index * 0.8,
+          }}
+          className="absolute inset-y-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/8 to-transparent"
+        />
+      )}
 
       <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-7">
         <div className="flex items-start justify-between gap-3">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-flame-500/40 bg-flame-500/15 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-flame-200 backdrop-blur-sm">
             {c.category}
           </span>
-          <motion.div
+          <m.div
             whileHover={{ rotate: 45 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="rounded-full border border-white/20 bg-black/30 p-2 backdrop-blur-sm transition-colors duration-300 group-hover:border-flame-400 group-hover:bg-flame-500 group-hover:text-black"
           >
             <ArrowUpRight className="h-4 w-4" />
-          </motion.div>
+          </m.div>
         </div>
 
         <div>
@@ -181,6 +188,6 @@ function CaseCard({ caseData: c, index }: { caseData: CaseItem; index: number })
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-flame-500/0 transition-all duration-500 group-hover:ring-flame-500/30 group-hover:[box-shadow:0_0_60px_-10px_rgba(249,115,22,0.4)_inset]"
       />
-    </motion.div>
+    </m.div>
   )
 }
