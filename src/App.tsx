@@ -5,9 +5,12 @@ import { ScrollProgress } from './components/ScrollProgress'
 import { SecretHud } from './components/SecretHud'
 import { useLenis } from './hooks/useLenis'
 import { Advantages } from './sections/Advantages'
+import { AppPromo } from './sections/AppPromo'
 import { Cases } from './sections/Cases'
 import { Contact } from './sections/Contact'
 import { Footer } from './sections/Footer'
+import { Founders } from './sections/Founders'
+import { SpecialOffer } from './sections/SpecialOffer'
 import { Gallery } from './sections/Gallery'
 import { Header } from './sections/Header'
 import { Hero } from './sections/Hero'
@@ -45,7 +48,10 @@ export default function App() {
           <Content />
         </Suspense>
         <Process />
+        <SpecialOffer />
         <Reviews />
+        <AppPromo />
+        <Founders />
         <Contact />
       </main>
       <Footer />
