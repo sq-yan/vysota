@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Smartphone } from 'lucide-react'
 import { m, useScroll, useTransform } from 'framer-motion'
 import { BRAND } from '../data/site'
 import { BrandMark } from '../components/BrandMark'
@@ -46,13 +46,23 @@ export function Header() {
             </a>
           ))}
         </nav>
-        <a
-          href="#contact"
-          className="group inline-flex items-center gap-2 rounded-full border border-flame-500/40 bg-flame-500/10 px-4 py-2 text-sm font-medium text-flame-200 backdrop-blur-md transition hover:bg-flame-500 hover:text-black"
-        >
-          Рассчитать
-          <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </a>
+        <div className="flex items-center gap-2">
+          {/* Бригадир — наш продукт, кнопка заметнее и живёт на всех экранах */}
+          <a
+            href="#app"
+            className="inline-flex items-center gap-2 rounded-full bg-flame-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-flame-400"
+          >
+            <Smartphone className="h-4 w-4" />
+            Бригадир
+          </a>
+          <a
+            href="#contact"
+            className="group hidden items-center gap-2 rounded-full border border-flame-500/40 bg-flame-500/10 px-4 py-2 text-sm font-medium text-flame-200 backdrop-blur-md transition hover:bg-flame-500 hover:text-black sm:inline-flex"
+          >
+            Рассчитать
+            <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+        </div>
       </div>
     </m.header>
   )
