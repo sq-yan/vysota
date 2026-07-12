@@ -1,6 +1,9 @@
 import { m } from 'framer-motion'
-import { Smartphone, Download, MapPin, Camera, FileText, WifiOff } from 'lucide-react'
+import { Smartphone, Download, Globe, MapPin, Camera, FileText, WifiOff } from 'lucide-react'
 import cover from '../assets/brigadir-cover.jpg'
+
+// Веб-версия БРИГАДИРа (закрытая бета): вход по коду бета-теста
+const WEB_APP_URL = 'https://app.vysota-vr.ru'
 
 const FEATURES = [
   { icon: MapPin, text: 'Табель с геометкой — видно, кто на объекте' },
@@ -54,6 +57,15 @@ export function AppPromo() {
             </ul>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
+              <a
+                href={WEB_APP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 rounded-full bg-flame-500 px-6 py-3.5 text-base font-semibold text-ink-950 shadow-glow-flame transition hover:bg-flame-400"
+              >
+                <Globe className="h-5 w-5" />
+                Открыть веб-версию
+              </a>
               <button
                 disabled
                 aria-disabled="true"
@@ -65,20 +77,21 @@ export function AppPromo() {
               </button>
               <span className="inline-flex items-center gap-2 rounded-full border border-flame-500/30 bg-flame-500/5 px-3 py-1.5 text-xs uppercase tracking-[0.2em] text-flame-300">
                 <Smartphone className="h-3.5 w-3.5" />
-                скоро релиз
+                закрытая бета
               </span>
             </div>
 
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-steel-400">
-              Скачивание откроется на этой странице с официальным релизом. На закрытый
-              бета-тест будут выделены несколько строительных компаний —{' '}
+              Веб-версия работает по коду бета-теста: регистрация — только по приглашению.
+              Скачивание приложения откроется с официальным релизом. Хотите в число
+              бета-тестеров —{' '}
               <a
                 href="#contact"
                 className="text-flame-300 underline underline-offset-2 transition hover:text-flame-200"
               >
                 оставьте заявку
               </a>
-              , если хотите попасть в их число.
+              .
             </p>
           </div>
 
