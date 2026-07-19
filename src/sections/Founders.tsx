@@ -7,6 +7,8 @@ function initials(name: string): string {
   return `${(first ?? '')[0] ?? ''}${(last ?? '')[0] ?? ''}`
 }
 
+const single = FOUNDERS.length === 1
+
 // Кто за этим стоит: семейное дело, отвечаем именами.
 export function Founders() {
   return (
@@ -14,11 +16,11 @@ export function Founders() {
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           kicker="Кто за этим стоит"
-          title="Основатели"
-          subtitle="Семейное дело: работы ведём сами и отвечаем за результат своими именами."
+          title={single ? 'Основатель' : 'Основатели'}
+          subtitle="Семейное дело: работы ведём сами и отвечаем за результат своим именем."
         />
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+        <div className={single ? 'mt-10 flex justify-center' : 'mt-10 grid gap-5 sm:grid-cols-2'}>
           {FOUNDERS.map((f, i) => (
             <m.div
               key={f.name}
@@ -26,11 +28,22 @@ export function Founders() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-              className="flex items-center gap-5 rounded-3xl border border-white/10 bg-white/[0.03] p-6"
+              className={`flex items-center gap-5 rounded-3xl border border-white/10 bg-white/[0.03] p-6 ${
+                single ? 'w-full max-w-md' : ''
+              }`}
             >
-              <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-flame-500/10 font-display text-2xl text-flame-300">
-                {initials(f.name)}
-              </div>
+              {'photo' in f && f.photo ? (
+                <img
+                  src={f.photo}
+                  alt={f.name}
+                  loading="lazy"
+                  className="h-20 w-20 shrink-0 rounded-2xl object-cover ring-1 ring-white/10"
+                />
+              ) : (
+                <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-flame-500/10 font-display text-2xl text-flame-300">
+                  {initials(f.name)}
+                </div>
+              )}
               <div>
                 <div className="font-display text-xl leading-tight">{f.name}</div>
                 <div className="mt-1 text-sm text-steel-400">{f.role}</div>

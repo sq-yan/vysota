@@ -8,8 +8,10 @@ export const TELEGRAM_URL = 'https://t.me/dosick'
 export const YOUTUBE_URL = 'https://youtube.com/@vertical_resh'
 
 // Основатели (блок «Кто за этим стоит»)
-// TODO: подгрузить реальные фото основателей, когда отфоткаются (заменят инициалы)
 export const FOUNDERS = [
-  { name: 'Налдеев Денис Викторович', role: 'Основатель · производство и контроль работ' },
-  { name: 'Налдеев Олег Денисович', role: 'Сооснователь · продукт и цифровые сервисы' },
+  {
+    name: 'Налдеев Денис Викторович',
+    role: 'Основатель · производство и контроль работ',
+    photo: '/founder-denis.jpg',
+  },
 ] as const
