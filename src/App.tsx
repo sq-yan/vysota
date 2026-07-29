@@ -15,6 +15,7 @@ import { Gallery } from './sections/Gallery'
 import { Header } from './sections/Header'
 import { Hero } from './sections/Hero'
 import { MarqueeStrip } from './sections/MarqueeStrip'
+import { Pricing } from './sections/Pricing'
 import { Process } from './sections/Process'
 import { Reviews } from './sections/Reviews'
 import { Services } from './sections/Services'
@@ -51,6 +52,7 @@ export default function App() {
         <SpecialOffer />
         <Reviews />
         <AppPromo />
+        <Pricing />
         <Founders />
         <Contact />
       </main>

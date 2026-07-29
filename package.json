@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "node scripts/build-legal.mjs && tsc -b && vite build",
+    "legal": "node scripts/build-legal.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

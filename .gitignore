@@ -25,3 +25,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# генерируются из src/data/legal.json скриптом scripts/build-legal.mjs
+public/oferta.html
+public/politika.html
