@@ -23,12 +23,18 @@ export function Pricing() {
             Платит бригадир. Работягам — бесплатно
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-steel-300">
-            Один счёт за всю бригаду, без оплаты за каждого человека. Первые{' '}
-            {legal.trialDays} дней — бесплатно, карта не нужна.
+            Одна фиксированная цена за всю бригаду — не за каждого человека и не за
+            каждый объект. Первые {legal.trialDays} дней — бесплатно, карта не нужна.
           </p>
         </m.div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        {/* Тариф один — карточку не растягиваем на всю ширину, иначе она читается
+            как пустая таблица; сетка вернётся сама, если тарифов станет больше */}
+        <div
+          className={`mt-12 grid gap-6 ${
+            legal.plans.length > 1 ? 'md:grid-cols-2' : 'mx-auto max-w-xl'
+          }`}
+        >
           {legal.plans.map((plan, i) => (
             <m.div
               key={plan.code}

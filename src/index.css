@@ -39,15 +39,11 @@ body,
 
 body {
   background: transparent;
-  /* hide native cursor on desktop where custom is shown */
 }
 
-@media (hover: hover) and (pointer: fine) {
-  body.has-custom-cursor,
-  body.has-custom-cursor * {
-    cursor: none !important;
-  }
-}
+/* Кастомного курсора здесь больше нет: белый кружок ехал за мышью на пружине,
+   отставал от настоящего указателя и в него было невозможно попасть по кнопке
+   (04.08.2026, жалоба с живого просмотра). Системный курсор не трогаем. */
 
 * {
   box-sizing: border-box;

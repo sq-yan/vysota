@@ -1,9 +1,52 @@
 import { m } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { Smartphone, Download, Globe, MapPin, Camera, FileText, WifiOff } from 'lucide-react'
 import cover from '../assets/brigadir-cover.jpg'
 
 // Веб-версия БРИГАДИРа: открытая регистрация по почте (коды доступа отменены 27.07)
 const WEB_APP_URL = 'https://app.vysota-vr.ru'
+
+// APK раздаёт наш же сервер: приложение живёт мимо Google Play.
+// Ссылка постоянная — сервер сам редиректит на текущий файл канала, поэтому
+// новая сборка не требует передеплоя сайта.
+const API_URL = 'https://api.vysota-vr.ru'
+const DOWNLOAD_URL = `${API_URL}/app/latest?channel=stable`
+
+type Build = { versionName: string; size: number }
+
+/**
+ * Что известно о свежей сборке.
+ * `soon` — сервер ответил «в канале stable сборки нет»: кнопку честно гасим.
+ * `unknown` — до сервера не достучались; кнопку оставляем рабочей, потому что
+ * скачивание идёт с него же и упавший опрос ещё не значит упавшую раздачу.
+ */
+type BuildState =
+  | { kind: 'loading' }
+  | { kind: 'ready'; build: Build }
+  | { kind: 'soon' }
+  | { kind: 'unknown' }
+
+function useLatestBuild(): BuildState {
+  const [state, setState] = useState<BuildState>({ kind: 'loading' })
+  useEffect(() => {
+    let alive = true
+    fetch(`${API_URL}/app/version?channel=stable`)
+      .then(async res => {
+        if (res.status === 404) return { kind: 'soon' } as const
+        if (!res.ok) throw new Error(String(res.status))
+        const data = (await res.json()) as Build
+        return { kind: 'ready', build: data } as const
+      })
+      .then(next => alive && setState(next))
+      .catch(() => alive && setState({ kind: 'unknown' }))
+    return () => {
+      alive = false
+    }
+  }, [])
+  return state
+}
+
+const mb = (bytes: number) => `${Math.round(bytes / 1024 / 1024)} МБ`
 
 const FEATURES = [
   { icon: MapPin, text: 'Табель с геометкой — видно, кто на объекте' },
@@ -14,6 +57,7 @@ const FEATURES = [
 
 // Промо нашего приложения БРИГАДИР — та же франшиза, тот же бренд.
 export function AppPromo() {
+  const latest = useLatestBuild()
   return (
     <section id="app" className="relative px-5 py-28 sm:px-8 sm:py-36">
       <div className="mx-auto max-w-6xl">
@@ -66,15 +110,30 @@ export function AppPromo() {
                 <Globe className="h-5 w-5" />
                 Открыть веб-версию
               </a>
-              <button
-                disabled
-                aria-disabled="true"
-                title="Станет доступно с официальным релизом"
-                className="inline-flex cursor-not-allowed items-center gap-3 rounded-full bg-white/10 px-6 py-3.5 text-base font-semibold text-steel-400"
-              >
-                <Download className="h-5 w-5" />
-                Скачать приложение
-              </button>
+              {latest.kind === 'soon' ? (
+                <button
+                  disabled
+                  aria-disabled="true"
+                  title="Сборка готовится — загляните позже"
+                  className="inline-flex cursor-not-allowed items-center gap-3 rounded-full bg-white/10 px-6 py-3.5 text-base font-semibold text-steel-400"
+                >
+                  <Download className="h-5 w-5" />
+                  Скачать приложение
+                </button>
+              ) : (
+                <a
+                  href={DOWNLOAD_URL}
+                  className="inline-flex items-center gap-3 rounded-full border border-flame-500/40 bg-flame-500/10 px-6 py-3.5 text-base font-semibold text-white transition hover:border-flame-400 hover:bg-flame-500/20"
+                >
+                  <Download className="h-5 w-5 text-flame-400" />
+                  Скачать для Android
+                  {latest.kind === 'ready' && (
+                    <span className="text-sm font-normal text-steel-300">
+                      {latest.build.versionName} · {mb(latest.build.size)}
+                    </span>
+                  )}
+                </a>
+              )}
               <span className="inline-flex items-center gap-2 rounded-full border border-flame-500/30 bg-flame-500/5 px-3 py-1.5 text-xs uppercase tracking-[0.2em] text-flame-300">
                 <Smartphone className="h-3.5 w-3.5" />
                 вход свободный
@@ -83,8 +142,9 @@ export function AppPromo() {
 
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-steel-400">
               Веб-версия открыта для всех: регистрация по почте за минуту, коды доступа не
-              нужны. Скачивание приложения для Android откроется с официальным релизом. Есть
-              вопросы —{' '}
+              нужны. Приложение для Android мы раздаём сами, мимо магазинов, — при установке
+              Android спросит разрешение на установку из этого источника, это нормально.
+              Обновления приложение потом предлагает само. Есть вопросы —{' '}
               <a
                 href="#contact"
                 className="text-flame-300 underline underline-offset-2 transition hover:text-flame-200"

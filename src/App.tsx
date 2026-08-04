@@ -1,5 +1,4 @@
 import { lazy, Suspense } from 'react'
-import { Cursor } from './components/Cursor'
 import { PromoBar } from './components/PromoBar'
 import { ScrollProgress } from './components/ScrollProgress'
 import { SecretHud } from './components/SecretHud'
@@ -33,7 +32,6 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-ink-950 text-white">
       <ScrollProgress />
-      <Cursor />
       <SecretHud />
       <PromoBar />
       <Header />
