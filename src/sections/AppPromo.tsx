@@ -2,6 +2,7 @@ import { m } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Smartphone, Download, Globe, MapPin, Camera, FileText, WifiOff } from 'lucide-react'
 import cover from '../assets/brigadir-cover.jpg'
+import { goal } from '../lib/metrika'
 
 // Веб-версия БРИГАДИРа: открытая регистрация по почте (коды доступа отменены 27.07)
 const WEB_APP_URL = 'https://app.vysota-vr.ru'
@@ -105,6 +106,7 @@ export function AppPromo() {
                 href={WEB_APP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => goal('open_web_app')}
                 className="inline-flex items-center gap-3 rounded-full bg-flame-500 px-6 py-3.5 text-base font-semibold text-ink-950 shadow-glow-flame transition hover:bg-flame-400"
               >
                 <Globe className="h-5 w-5" />
@@ -123,6 +125,7 @@ export function AppPromo() {
               ) : (
                 <a
                   href={DOWNLOAD_URL}
+                  onClick={() => goal('download_apk')}
                   className="inline-flex items-center gap-3 rounded-full border border-flame-500/40 bg-flame-500/10 px-6 py-3.5 text-base font-semibold text-white transition hover:border-flame-400 hover:bg-flame-500/20"
                 >
                   <Download className="h-5 w-5 text-flame-400" />

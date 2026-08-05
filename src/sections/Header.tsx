@@ -6,7 +6,8 @@ import { toggleActive } from '../lib/secret'
 
 const LINKS = [
   { href: '#services', label: 'Услуги' },
-  { href: '#advantages', label: 'Почему мы' },
+  // «Почему мы» убрано вместе с блоком Advantages (05.08.2026) — ссылка вела бы
+  // в пустоту. Вернуть, когда на это место встанет калькулятор стоимости.
   { href: '#cases', label: 'Объекты' },
   { href: '#process', label: 'Как работаем' },
   { href: '#contact', label: 'Контакты' },

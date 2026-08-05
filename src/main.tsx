@@ -8,6 +8,10 @@ import '@fontsource-variable/oswald/index.css'
 import '@fontsource-variable/inter/index.css'
 import './index.css'
 import App from './App.tsx'
+import { initMetrika } from './lib/metrika'
+
+// Счётчик поднимаем до отрисовки, но он ничего не грузит, пока не задан номер
+initMetrika()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

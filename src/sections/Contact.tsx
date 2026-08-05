@@ -3,6 +3,7 @@ import { Phone, Send } from 'lucide-react'
 import { useRef } from 'react'
 import { MagneticButton } from '../components/MagneticButton'
 import { PHONE_DISPLAY, PHONE_TEL, TELEGRAM_URL } from '../data/site'
+import { goal } from '../lib/metrika'
 
 export function Contact() {
   const ref = useRef<HTMLElement>(null)
@@ -58,6 +59,7 @@ export function Contact() {
             <div className="mt-10 flex flex-wrap gap-4">
               <MagneticButton
                 href={PHONE_TEL}
+                onClick={() => goal('call')}
                 className="group inline-flex items-center gap-3 rounded-full bg-flame-500 px-7 py-4 text-base font-semibold text-black shadow-glow-flame transition hover:bg-flame-400"
               >
                 <Phone className="h-5 w-5" />
@@ -67,6 +69,7 @@ export function Contact() {
                 href={TELEGRAM_URL}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => goal('telegram')}
                 strength={14}
                 className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.03] px-7 py-4 text-base font-medium text-white/90 backdrop-blur-sm transition hover:bg-white/[0.08]"
               >

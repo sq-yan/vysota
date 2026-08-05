@@ -167,8 +167,11 @@ export function Hero() {
             transition={{ duration: 0.9, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
             className="mt-10 grid max-w-xl grid-cols-2 gap-y-7 border-t border-white/5 pt-6 sm:mt-14 sm:grid-cols-4 sm:pt-8"
           >
-            <Stat value={7} suffix="+" label="лет на высоте" />
-            <Stat value={350} suffix="+" label="объектов" />
+            {/* Цифры правил Денис Викторович 05.08.2026: стаж считаем от его
+                собственного, а не от даты регистрации ИП; объектов — сотня,
+                которую можем показать и подтвердить, а не всё подряд */}
+            <Stat value={20} suffix="+" label="лет на высоте" />
+            <Stat value={100} suffix="+" label="объектов" />
             <InjuriesStat />
             <Stat value={24} suffix="/7" label="срочный выезд" />
           </m.div>

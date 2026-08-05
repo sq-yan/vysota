@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react'
+import { CookieNote } from './components/CookieNote'
 import { PromoBar } from './components/PromoBar'
 import { ScrollProgress } from './components/ScrollProgress'
 import { SecretHud } from './components/SecretHud'
 import { useLenis } from './hooks/useLenis'
-import { Advantages } from './sections/Advantages'
 import { AppPromo } from './sections/AppPromo'
 import { Cases } from './sections/Cases'
 import { Contact } from './sections/Contact'
@@ -32,6 +32,7 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-ink-950 text-white">
       <ScrollProgress />
+      <CookieNote />
       <SecretHud />
       <PromoBar />
       <Header />
@@ -40,7 +41,11 @@ export default function App() {
         <TrustStrip />
         <MarqueeStrip />
         <Services />
-        <Advantages />
+        {/* Здесь стоял блок «Почему мы» (Advantages) — снят 05.08.2026 по
+            просьбе Дениса Викторовича. Место освобождено под калькулятор
+            стоимости: клиент выбирает вид работ (межпанельный шов, вскрытие,
+            силатерм и т.д.), вводит метраж и сразу видит сумму.
+            Старый блок при необходимости достаётся из истории git. */}
         <Cases />
         <Gallery />
         <Suspense fallback={<section className="min-h-[480px]" />}>
